@@ -12,6 +12,10 @@ const { searchForm, gallery, loadMoreBtn, endCollectionText } = {
     endCollectionText: document.querySelector('.end-collection-text'),
   };
 
+  let currentPage = 1;
+  let currentHits = 0;
+  let searchQuery = '';
+
   function renderCardImage(arr) {
     const markup = arr.map(item => cardTemplate(item)).join('');
     gallery.insertAdjacentHTML('beforeend', markup);
@@ -23,18 +27,15 @@ const { searchForm, gallery, loadMoreBtn, endCollectionText } = {
     captionDelay: 250,
   });
   
-  let currentPage = 1;
-  let currentHits = 0;
-  let searchQuery = '';
-  
   searchForm.addEventListener('submit', onSubmitSearchForm);
   
   async function onSubmitSearchForm(e) {
     e.preventDefault();
     searchQuery = e.currentTarget.searchQuery.value;
     currentPage = 1;
+    e.currentTarget.reset();
   
-    if (searchQuery === '') {
+    if (searchQuery === ' ') {
       return;
     }
   
@@ -74,6 +75,7 @@ const { searchForm, gallery, loadMoreBtn, endCollectionText } = {
     } catch (error) {
       console.log(error);
     }
+
   }
   
   loadMoreBtn.addEventListener('click', onClickLoadMoreBtn);
