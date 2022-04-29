@@ -31,11 +31,11 @@ const { searchForm, gallery, loadMoreBtn, endCollectionText } = {
   
   async function onSubmitSearchForm(e) {
     e.preventDefault();
-    searchQuery = e.currentTarget.searchQuery.value;
+    searchQuery = e.currentTarget.searchQuery.value.trim();
     currentPage = 1;
     e.currentTarget.reset();
   
-    if (searchQuery === ' ') {
+    if (searchQuery !== ' ') {
       return;
     }
   
