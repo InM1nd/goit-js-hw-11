@@ -3,7 +3,6 @@ import cardTemplate from '../templates/card-template.hbs';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import SimpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
-import throttle from 'lodash.throttle';
 
 const { searchForm, gallery, loadMoreBtn, endCollectionText } = {
     searchForm: document.querySelector('.search-form'),
@@ -35,7 +34,7 @@ const { searchForm, gallery, loadMoreBtn, endCollectionText } = {
     currentPage = 1;
     e.currentTarget.reset();
   
-    if (searchQuery !== ' ') {
+    if (!searchQuery) {
       return;
     }
   
